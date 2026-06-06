@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Habit Tracker</title>
+
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Habits" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <p class="small-text" id="today-label">Today</p>
+        <h1>Habit Tracker</h1>
+      </div>
+      <div class="score-circle">
+        <span id="progress-percent">0%</span>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat-card">
+        <span id="total-habits">0</span>
+        <p>Habits</p>
+      </div>
+
+      <div class="stat-card">
+        <span id="done-today">0</span>
+        <p>Done Today</p>
+      </div>
+
+      <div class="stat-card">
+        <span id="best-streak">0</span>
+        <p>Best Streak</p>
+      </div>
+    </section>
+
+    <section class="add-card">
+      <h2>Add New Habit</h2>
+
+      <div class="form-row">
+        <input id="habit-name" type="text" placeholder="Example: Study JavaScript" />
+        <select id="habit-emoji">
+          <option value="📚">📚</option>
+          <option value="🏋️">🏋️</option>
+          <option value="💧">💧</option>
+          <option value="🧘">🧘</option>
+          <option value="🚶">🚶</option>
+          <option value="💻">💻</option>
+          <option value="📝">📝</option>
+        </select>
+      </div>
+
+      <button id="add-btn">Add Habit</button>
+    </section>
+
+    <section class="section-title">
+      <h2>Today</h2>
+      <button class="secondary-btn" id="clear-today-btn">Clear Today</button>
+    </section>
+
+    <section id="habit-list" class="habit-list"></section>
+
+    <section class="section-title">
+      <h2>Last 7 Days</h2>
+    </section>
+
+    <section id="week-view" class="week-view"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
