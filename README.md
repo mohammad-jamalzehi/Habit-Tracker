@@ -41,7 +41,7 @@ README.md    # Documentation
 - Streak behavior currently expects consecutive completed days ending today; alternatives (for example, keeping yesterday's streak until today's deadline) can be considered.
 - Storage parsing, schema validation and import/export need hardening.
 - Automated tests for local dates, daylight-saving transitions and streak calculation are not yet present.
-- Rendering currently uses HTML templates; untrusted user input should be escaped or inserted using DOM text nodes before production use.
+- Rendered habit names and emojis are escaped in HTML templates, but moving away from inline click handlers toward DOM event listeners would simplify further security hardening.
 - Accessibility and mobile usability should be evaluated in real browsers.
 
 **Project status:** Small frontend prototype; not a multi-user habit management platform.
