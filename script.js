@@ -15,9 +15,20 @@ const progressPercentEl = document.getElementById("progress-percent");
 const scoreCircle = document.querySelector(".score-circle");
 const todayLabel = document.getElementById("today-label");
 
+function getLocalDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return year + "-" + month + "-" + day;
+}
+
 function getTodayKey() {
-  const today = new Date();
-  return today.toISOString().split("T")[0];
+  return getLocalDateKey();
+}
+
+function escapeHtml(value) {
+  const entities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+  return String(value).replace(/[&<>"']/g, char => entities[char]);
 }
 
 function getLastSevenDays() {
@@ -27,7 +38,7 @@ function getLastSevenDays() {
     const date = new Date();
     date.setDate(date.getDate() - i);
 
-    const key = date.toISOString().split("T")[0];
+    const key = getLocalDateKey(date);
     days.push(key);
   }
 
@@ -122,7 +133,7 @@ function calculateStreak(habit) {
     const date = new Date();
     date.setDate(date.getDate() - i);
 
-    const key = date.toISOString().split("T")[0];
+    const key = getLocalDateKey(date);
 
     if (habit.completedDates.includes(key)) {
       streak++;
@@ -156,12 +167,12 @@ function renderHabits() {
     habitList.innerHTML += `
       <div class="habit-card">
         <div class="habit-left">
-          <div class="emoji-box">${habit.emoji}</div>
+          <div class="emoji-box">${escapeHtml(habit.emoji)}</div>
 
           <div class="habit-info">
-            <h3>${habit.name}</h3>
+            <h3>${escapeHtml(habit.name)}</h3>
             <p>${streak} day streak</p>
-            <button class="delete-btn" onclick="deleteHabit(${habit.id})">
+            <button class="delete-btn" onclick="deleteHabit(${Number(habit.id)})">
               Delete
             </button>
           </div>
@@ -169,7 +180,7 @@ function renderHabits() {
 
         <button 
           class="done-btn ${isDone ? "completed" : ""}" 
-          onclick="toggleHabit(${habit.id})"
+          onclick="toggleHabit(${Number(habit.id)})"
         >
           ${isDone ? "✓" : ""}
         </button>
@@ -235,7 +246,7 @@ function renderWeekView() {
 
     weekView.innerHTML += `
       <div class="week-row">
-        <div class="week-name">${habit.emoji} ${habit.name}</div>
+        <div class="week-name">${escapeHtml(habit.emoji)} ${escapeHtml(habit.name)}</div>
         ${dots}
       </div>
     `;
